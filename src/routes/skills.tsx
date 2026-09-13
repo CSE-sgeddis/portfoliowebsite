@@ -6,24 +6,55 @@ export const Route = createFileRoute("/skills")({
   head: () => ({
     meta: [
       { title: "Skills — Archive of the Seeker" },
-      { name: "description", content: "The seeker's archetypes and stat distribution." },
+      { name: "description", content: "Programming languages, tools, and professional skills." },
     ],
   }),
   component: SkillsPage,
 });
 
-const ARCHETYPES = [
-  { name: "Frontend Mage", level: 92, jp: "前衛魔術師", skills: ["React", "TypeScript", "Tailwind", "Framer Motion"] },
-  { name: "Backend Knight", level: 78, jp: "後衛騎士", skills: ["Node", "Postgres", "Redis", "Edge Functions"] },
-  { name: "Design Bard",    level: 70, jp: "意匠の吟遊詩人", skills: ["Figma", "Type", "Color", "Motion"] },
-  { name: "DevOps Ranger",  level: 60, jp: "辺境の追跡者", skills: ["Docker", "CI/CD", "Cloudflare", "Observability"] },
+// NOTE: the "level" numbers below are placeholders meant to reflect rough
+// self-rated comfort, not a formal metric — adjust them to whatever feels
+// honest to you.
+const CATEGORIES = [
+  {
+    name: "Programming Languages",
+    jp: "プログラミング言語",
+    level: 75,
+    skills: ["Java", "C++", "JavaScript", "HTML/CSS"],
+  },
+  {
+    name: "Tools & Technologies",
+    jp: "開発環境",
+    level: 70,
+    skills: ["Git", "GitHub", "VS Code", "Eclipse", "UNIX/Linux", "Microsoft Office Suite"],
+  },
+  {
+    name: "Professional Skills",
+    jp: "対人能力",
+    level: 85,
+    skills: [
+      "Customer Service",
+      "Team Collaboration",
+      "Communication",
+      "Time Management",
+      "Problem Solving",
+      "Adaptability",
+      "Attention to Detail",
+    ],
+  },
+  {
+    name: "Languages",
+    jp: "言語",
+    level: 60,
+    skills: ["English (native)", "Chinese (intermediate)"],
+  },
 ];
 
 function SkillsPage() {
   return (
     <SubPageLayout title="Skills" jpTitle="スキル · Archetype Tree">
       <div className="mx-auto grid max-w-6xl gap-5">
-        {ARCHETYPES.map((a, i) => (
+        {CATEGORIES.map((a, i) => (
           <motion.div
             key={a.name}
             initial={{ opacity: 0, x: -30 }}
@@ -37,7 +68,7 @@ function SkillsPage() {
                 <h3 className="font-display text-2xl uppercase text-foreground">{a.name}</h3>
               </div>
               <div className="text-right">
-                <p className="font-display text-[10px] uppercase tracking-[0.3em] text-foreground/60">Mastery</p>
+                <p className="font-display text-[10px] uppercase tracking-[0.3em] text-foreground/60">Comfort</p>
                 <p className="font-display text-3xl text-primary">{a.level}</p>
               </div>
             </div>
@@ -53,7 +84,10 @@ function SkillsPage() {
 
             <div className="mt-4 flex flex-wrap gap-2">
               {a.skills.map((s) => (
-                <span key={s} className="border border-primary/50 px-2 py-0.5 font-display text-[10px] uppercase tracking-widest text-foreground/80">
+                <span
+                  key={s}
+                  className="border border-primary/50 px-2 py-0.5 font-display text-[10px] uppercase tracking-widest text-foreground/80"
+                >
                   {s}
                 </span>
               ))}
